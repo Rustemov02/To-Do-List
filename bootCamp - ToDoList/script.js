@@ -1,8 +1,11 @@
 let addBtn = document.querySelector('.btn')
 let ul = document.querySelector('ul')
+let li
+let t
 let icon = document.querySelector('#list-input')
-let input = document.querySelector('#main-input')//writed for span ???
-let inputValue = document.querySelector('#main-input').value
+let input = document.querySelector('#main-input')
+// let inputValue = document.querySelector('#main-input').value
+let inputValue;
 let arr = []
 let sortBtn = document.querySelector('.sorter')
 
@@ -14,41 +17,36 @@ function check() {
   }
 }
 
-
-
 function createNewList() {
 
-  ul.classList.remove('del')
-  ul.classList.add('myUl')
 
-  let li = document.createElement("li")
+  li = document.createElement("li")
 
   li.className = 'myLi'
   li.classList.add('li')
-  let input = document.querySelector('#main-input')//writed for span ???
-  let inputValue = document.querySelector('#main-input').value
-  let t = document.createTextNode(inputValue)
-   li.appendChild(t)
+  let input = document.querySelector('#main-input')
+  inputValue = document.querySelector('#main-input').value
+  t = document.createTextNode(inputValue)
+  li.appendChild(t)
 
   if (inputValue == "") {
     alert('You must write something :)')
 
   } else if (inputValue.length > 15) {
-    let yazi = inputValue.substr(0, inputValue.length - (inputValue.length-15))
-    console.log(yazi) 
+    let yazi = inputValue.substr(0, inputValue.length - (inputValue.length - 15))
     li.innerHTML = yazi
     ul.append(li)
-    arr.push(inputValue)
+    // arr.push(inputValue)
   } else {
- 
+
     ul.append(li)
     arr.push(inputValue)
 
+    ul.classList.remove('del')
+    ul.classList.add('myUl')
   }
 
-
   input.value = ""
-
 
   //create the 'close' icon
   let span = document.createElement("span")
@@ -62,29 +60,21 @@ function createNewList() {
     check()
 
   }
-
-
-
-  sortBtn.onclick = () => {
-
-
-
-    arr.sort((a, b) => a - b)
-
-    for (let i = 0; i < ul.children.length; i++) {
-      ul.children[i].innerHTML = `${arr[i]} <span class='close'>\u00D7</span>`
-    }
-
-    let span = document.querySelectorAll('.close')
-    span.forEach((item) => {
-      item.addEventListener('click', function () {
-        this.parentElement.remove()
-        check()
-      })
-    })
-  }
 }
 
+sortBtn.addEventListener('click', () => {
+
+  for (let i = 0; i < inputValue.length; i++) {
+    arr[i] = inputValue[i]
+    t = document.createTextNode(arr[i])
+    li.appendChild(t)
+    ul.append(li) 
+  }
+
+
+  arr.sort()
+  console.log(arr)
+})
 
 addBtn.addEventListener('click', createNewList)
 
