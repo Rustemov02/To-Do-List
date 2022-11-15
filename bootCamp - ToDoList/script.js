@@ -1,6 +1,5 @@
 let addBtn = document.querySelector('.btn')
 let ul = document.querySelector('ul')
-let li
 let t
 let icon = document.querySelector('#list-input')
 let input = document.querySelector('#main-input')
@@ -20,13 +19,13 @@ function check() {
 function createNewList() {
 
 
-  li = document.createElement("li")
+  let li = document.createElement("li")
 
   li.className = 'myLi'
   li.classList.add('li')
   let input = document.querySelector('#main-input')
   inputValue = document.querySelector('#main-input').value
-  t = document.createTextNode(inputValue)
+  let t = document.createTextNode(inputValue)
   li.appendChild(t)
 
   if (inputValue == "") {
@@ -64,12 +63,9 @@ function createNewList() {
 
 sortBtn.addEventListener('click', () => {
 
-  for (let i = 0; i < inputValue.length; i++) {
-    arr[i] = inputValue[i]
-    t = document.createTextNode(arr[i])
-    li.appendChild(t)
-    ul.append(li) 
-  }
+  //  for (let i = 0; i < inputValue.length; i++) {
+  //     arr[i] = inputValue[i] 
+  //   }
 
 
   arr.sort()
